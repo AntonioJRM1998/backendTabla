@@ -1,10 +1,10 @@
 import { Table, Column, Model } from "sequelize-typescript";
-import { STRING,DATE } from "sequelize";
+import { STRING,DATE,INTEGER } from "sequelize";
 
 @Table({
   freezeTableName: true,
-  schema: "ejercicio_Angular",
-  tableName: "Usuarios",
+  schema: "cryptobase",
+  tableName: "usuarios",
 })
 export class UsuarioPOJO extends Model {
   @Column({
@@ -24,7 +24,21 @@ export class UsuarioPOJO extends Model {
     field: "password",
   })
   password: string;
-
+  @Column({
+    type: STRING,
+    field: "email",
+  })
+  email: string;
+  @Column({
+    type: INTEGER,
+    field: "deposit",
+  })
+  deposit: number;
+  @Column({
+    type: STRING,
+    field: "birthdate",
+  })
+  birthdate: string;
   @Column({
     type: DATE,
     field: "createdAt",

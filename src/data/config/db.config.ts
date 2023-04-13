@@ -1,12 +1,14 @@
 import { Sequelize } from 'sequelize-typescript';
 import { UsuarioPOJO } from '../models/user.model';
+import { CryptoPOJO } from '../models/crypto.model';
+import { CryptoUsersPOJO } from '../models/crypto-users.model';
 export const connect = () => {
   const DB_HOSTNAME = "localhost";
   const DB_PORT = 5432;
   const DB_NAME = "postgres";
   const DB_USERNAME = "postgres";
   const DB_PASSWORD = "armagedon1";
-  const DB_SCHEMA = "ejercicio-Angular";
+  const DB_SCHEMA = "cryptobase";
   const DB_DIALECT: any = "postgres";
 
   const dbConfig = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
@@ -23,7 +25,7 @@ export const connect = () => {
     },
   });
   
-  dbConfig.addModels([UsuarioPOJO]);
+  dbConfig.addModels([UsuarioPOJO,CryptoPOJO,CryptoUsersPOJO]);
   const db: any = {};
   db.Sequelize = Sequelize;
   db.sequelize = dbConfig;

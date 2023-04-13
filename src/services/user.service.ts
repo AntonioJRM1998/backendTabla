@@ -33,6 +33,32 @@ export class UserService{
         })
          return userPromise;
     }
+    async getUserById(user_id:string): Promise <UsersDTO | undefined>{
+        const userPromise : UsersDTO | undefined = await this._userRepository.getUserById(user_id).then (userPojo =>{
+            if(!!userPojo){
+                return this.convertirPOJOaDTO(userPojo)
+            }else{
+                return undefined
+            }
+        }).catch (error=>{
+            console.error('Entro en el servicio' + error)
+            throw error
+        })
+        return userPromise
+    }
+    async updateUserBalance(newBalance:number,user_id:string):Promise<string>{
+        const updatePromise = await this._userRepository.updateUserBalance(newBalance,user_id).then (result =>{
+            if(result=='OK'){
+                return 'Se ha actualizado tus fondos'
+            }else{
+                return 'Se ha detectado un problema'
+            }
+        }).catch(error =>{
+            console.log(error)
+            throw error
+        })
+        return updatePromise
+    }
     convertirPOJOaDTO(user:UsuarioPOJO){
         let usuario:UsersDTO=<UsersDTO>user
         return usuario
